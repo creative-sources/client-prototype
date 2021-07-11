@@ -1,5 +1,6 @@
 {
   "name": "subscribers",
+  "homepage": "http://localhost:3000",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,6 +11,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@xstate/react": "^1.5.1",
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
     "framer-motion": "^4.1.17",
@@ -22,11 +24,13 @@
     "react-router": "5.0.0",
     "react-router-dom": "5.0.0",
     "react-scripts": "4.0.3",
+    "react-switch": "^6.0.0",
     "sass-mq": "^5.0.1",
     "typescript": "^4.1.2",
     "valtio": "^1.0.6",
     "web-vitals": "^1.0.1",
-    "webpack": "4.40.2"
+    "webpack": "4.40.2",
+    "xstate": "^4.22.0"
   },
   "scripts": {
     "start": "react-scripts start",

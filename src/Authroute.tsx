@@ -1,7 +1,8 @@
-import { useContext } from 'react'
+import React, { useContext } from 'react'
 import { RouteComponentProps, Route } from 'react-router-dom'
 import { SessionContext } from './sessions'
 import { Welcome } from './views/Welcome'
+
 interface Props {
     Component: React.FC<RouteComponentProps>
     path: string

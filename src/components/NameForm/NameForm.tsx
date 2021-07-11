@@ -16,7 +16,8 @@ interface ChildComponentProps {
         | null
         | undefined
     variant: any
-    label: string /* other props for ChildComponent */
+    label: string
+    /* other props for ChildComponent */
 }
 export interface IFormProps {
     children?: React.ReactNode
@@ -40,7 +41,6 @@ export const Form: React.SFC<ChildComponentProps> = ({
         handleSubmit,
         formState: { errors },
         getValues,
-        reset,
     } = useForm<Inputs>({
         mode: 'onChange',
     })

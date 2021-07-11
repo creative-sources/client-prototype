@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Layout from '../components/layout/Layout'
 import { Form } from '../components/NameForm/NameForm'
-import logo from '../assets/img/_A_Main Logo normal@2x.png'
+import logo from '../assets/img/logo.png'
 
 export const Subscribe = () => {
     const [show, setShow] = useState(true)
