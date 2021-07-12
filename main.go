@@ -22,16 +22,12 @@ import (
 )
 
 type User struct {
-	Name     string    `json:"name"`
-	Password string    `json:"password"`
-	Email    string    `json:"email"`
-	Avatar   string    `json:"avatar"`
-	List     []Country `json:"list"`
+	Name     string `json:"name"`
+	Password string `json:"password"`
+	Email    string `json:"email"`
+	Avatar   string `json:"avatar"`
 }
 
-type Country struct {
-	Name string `json:"name"`
-}
 type Article struct {
 	Id      string `json:"Id"`
 	Title   string `json:"Title"`
