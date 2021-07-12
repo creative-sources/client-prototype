@@ -6,13 +6,16 @@ import React, {
 } from 'react'
 import axios from 'axios'
 
-let endpoint = 'http://localhost:4000/'
+let endpoint = 'http://localhost:8080/'
 
 const config = {
     headers: {
         'Content-type': 'application/json; charset=UTF-8',
     },
 }
+
+
+
 interface State {
     id?: number
     email?: string
@@ -125,10 +128,10 @@ export function useAuth(initialState: State): {
 
     const subscribeUser = useCallback((data) => {
         let body = {data}
-        let response = axios.post(endpoint + 'users/subscribe', body, config)
+        let response = axios.post(endpoint + 'register', body, config)
         response.then((result) => {
             if (result.data) {
-                console.log('SUBSCRIBE')
+                console.log('REGISTER')
                 dispatch({
                     type: 'SUBSCRIBE',
                     id: result.data.user.id,
@@ -145,6 +148,7 @@ export function useAuth(initialState: State): {
     }, [])
 
     const loginUser = useCallback((ref: HTMLInputElement[]) => {
+        //TODO Adapt body to useForm hook data
         let body = { email: ref[0].value, password: ref[1].value }
         let response = axios.post(endpoint + 'users/login', body, config)
         response.then((result) => {

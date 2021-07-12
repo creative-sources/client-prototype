@@ -6,6 +6,7 @@ type Inputs = {
     email: string
     confirmEmail: string
     phone: string
+    accoutn: number
 }
 interface ChildComponentProps {
     children:
@@ -24,11 +25,7 @@ export interface IFormProps {
     onClick?: (e: any) => void
 }
 
-export const Form: React.SFC<ChildComponentProps> = ({
-    children,
-    variant,
-    label,
-}) => {
+export const Form: React.SFC<ChildComponentProps> = ({ variant, label }) => {
     const subscribeUser = useSubscribe()
     /* const subscribe = useCallback(
         (data) => {
@@ -61,7 +58,6 @@ export const Form: React.SFC<ChildComponentProps> = ({
                 maxWidth: '50vw',
             }}
         >
-            <h3>{children}</h3>
             {/* register your input into the hook by invoking the "register" function */}
             <div className={`form__group field ${variant}`}>
                 <input
