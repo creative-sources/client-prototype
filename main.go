@@ -21,11 +21,50 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+type LogLevel int
+
+const (
+	Trace   LogLevel = iota // 0
+	Debug                   // 1
+	Info                    // 2
+	Warning                 // 3
+	Error                   // 4
+)
+
+var LogLevelStrings = []string{"[Trace]", "[Debug]", "[Info]", "[Warning]", "[Error]"}
+
+func (l LogLevel) String() string {
+	return LogLevelStrings[l]
+}
+
+type contact struct {
+	Email string `json:"email"`
+	Phone string `validate:"nonzero,regexp=(0|\\+49|049|49)[0-9]+$"`
+}
+
+type account int
+
+const (
+	Free account = iota
+	Basic
+	Premium
+)
+
+var accountString = []string{"[Free]", "[Basic]", "[Premium]"}
+
+func (a account) String() string {
+	return accountString[a]
+}
+
+func Plan(a account, message string) {
+	fmt.Printf("%s: %s\n", a, message)
+}
+
 type User struct {
 	Name     string `json:"name"`
 	Password string `json:"password"`
-	Email    string `json:"email"`
-	Avatar   string `json:"avatar"`
+	Contact  contact
+	Account  account
 }
 
 type Article struct {
@@ -142,7 +181,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 	var user User
 	json.Unmarshal(reqBody, &user)
 
-	filter := bson.M{"email": user.Email}
+	filter := bson.M{"email": user.Contact.Email}
 	err := collection.FindOne(context.TODO(), filter).Decode(&user)
 
 	if err != nil {
@@ -172,6 +211,8 @@ func allUsers(w http.ResponseWriter, r *http.Request) {
 }
 func setUser(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("users post hitted")
+	s := User{Name: "Sean", Contact: contact{Email: "arepa@mail.com", Phone: "004930725623"}, Account: 2}
+	fmt.Printf("%+v", s)
 	w.Header().Set("Content-Type", "application/json")
 	setupResponse(&w, r)
 	if (*r).Method == "OPTIONS" {
@@ -182,7 +223,7 @@ func setUser(w http.ResponseWriter, r *http.Request) {
 	var user User
 	json.Unmarshal(reqBody, &user)
 
-	res, err := collection.InsertOne(context.Background(), bson.M{"name": user.Name, "email": user.Email, "password": user.Password})
+	res, err := collection.InsertOne(context.Background(), bson.M{"name": user.Name, "email": user.Contact.Email, "phone": user.Contact.Phone, "password": user.Password, "account": user.Account})
 	if err != nil {
 		return
 	}
@@ -360,7 +401,7 @@ func handleRequest() {
 	myRouter.HandleFunc("/login", login).Methods("POST")
 	myRouter.HandleFunc("/users", allUsers).Methods("GET")
 	myRouter.HandleFunc("/user/{id}", getUser).Methods("GET")
-	myRouter.HandleFunc("/user", setUser).Methods("POST")
+	myRouter.HandleFunc("/register", setUser).Methods("POST")
 	myRouter.HandleFunc("/articles", returnAllArticles)
 	myRouter.HandleFunc("/article", createNewArticle).Methods("POST")
 	// add our new DELETE endpoint here
