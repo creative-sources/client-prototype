@@ -11,7 +11,7 @@ const store = proxy<Store>({
 })
 
 export const load = (client: string): void => {
-    fetch(`http://localhost:4000/${client}`)
+    fetch(`http://localhost:4040/${client}`)
         .then((resp) => resp.json())
         .then((data) => {
             console.log(data)

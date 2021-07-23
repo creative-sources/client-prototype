@@ -4,6 +4,7 @@ import { Subscribe } from './views/Subscribe'
 import { OnBoarding } from './views/OnBoarding'
 import { NotFound } from './views/NotFound'
 import { Welcome } from './views/Welcome'
+import { Private } from 'views/Private'
 
 const Routes = [
     {
@@ -28,7 +29,7 @@ const Routes = [
     },
     {
         path: '/login',
-        component: Home,
+        component: Private,
         isPrivate: false,
     },
     {

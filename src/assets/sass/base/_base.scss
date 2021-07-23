@@ -35,18 +35,13 @@ a {
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
     font-size: 1.5rem;
-    background-color: #222222;
+    background-color: #332e2ecb;
 }
 
 .example-container div {
-    background: white;
+    background: rgb(32, 27, 27);
     border-radius: 30px;
     width: 150px;
     height: 150px;
@@ -70,11 +65,11 @@ body {
 .responsive {
     // Apply styling to mobile and upwards
     @include mq($from: mobile) {
-        color: red;
+        color: rgba(83, 38, 38, 0.671);
     }
     // Apply styling up to devices smaller than tablets (exclude tablets)
     @include mq($until: tablet) {
-        color: blue;
+        color: rgba(68, 68, 143, 0.705);
     }
     // Same thing, in landscape orientation
     @include mq($until: tablet, $and: '(orientation: landscape)') {

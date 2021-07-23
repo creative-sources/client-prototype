@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { useSubscribe } from '../../useAuth'
 
 type Inputs = {
+    name: string
     email: string
     confirmEmail: string
     phone: string
@@ -55,14 +56,29 @@ export const Form: React.SFC<ChildComponentProps> = ({ variant, label }) => {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                maxWidth: '50vw',
+                maxWidth: '78vw',
             }}
         >
             {/* register your input into the hook by invoking the "register" function */}
             <div className={`form__group field ${variant}`}>
                 <input
                     className="form__field"
-                    placeholder="888 888 8888"
+                    placeholder="Full name"
+                    type="text"
+                    defaultValue=""
+                    {...register('name')}
+                />
+                <label className="form__label" htmlFor="name">
+                   name 
+                </label>
+            </div>
+
+            {/* register your input into the hook by invoking the "register" function */}
+            <div className={`form__group field ${variant}`}>
+                <input
+                    className="form__field"
+                    placeholder="Email Adress"
+                    type="email"
                     defaultValue=""
                     {...register('email')}
                 />
@@ -75,7 +91,8 @@ export const Form: React.SFC<ChildComponentProps> = ({ variant, label }) => {
             <div className="form__group field">
                 <input
                     className="form__field"
-                    placeholder="888 888 8888"
+                    placeholder="confirm Email Adress"
+                    type="email"
                     {...register('confirmEmail', {
                         required: true,
                         validate: () =>
