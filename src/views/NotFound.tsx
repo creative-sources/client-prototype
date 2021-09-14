@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import Reactive from "components/Reactive";
+
+import { Grid } from "@chakra-ui/layout";
 
 export const NotFound = () => {
-    return (
-        <div>
-            <h5>NOT FOUND</h5>
-        </div>
-    )
-}
+  return (
+    <Grid>
+      <Reactive />
+    </Grid>
+  );
+};

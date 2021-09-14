@@ -61,10 +61,12 @@ func Plan(a account, message string) {
 }
 
 type User struct {
-	Name     string `json:"name"`
-	Password string `json:"password"`
-	Contact  contact
-	Account  account
+	Name      string   `json:"name"`
+	Password  string   `json:"password"`
+	Bussiness bool     `json:"hasBusiness"`
+	Languages []string `json:"languages"`
+	Contact   contact
+	Account   account
 }
 
 type Article struct {
@@ -210,9 +212,9 @@ func allUsers(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(payload)
 }
 func setUser(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("users post hitted")
-	s := User{Name: "Sean", Contact: contact{Email: "arepa@mail.com", Phone: "004930725623"}, Account: 2}
-	fmt.Printf("%+v", s)
+	fmt.Println("a new user has register!")
+	/* s := User{Name: "Sean", Contact: contact{Email: "arepa@mail.com", Phone: "004930725623"}, Account: 2}
+	fmt.Printf("%+v", s )*/
 	w.Header().Set("Content-Type", "application/json")
 	setupResponse(&w, r)
 	if (*r).Method == "OPTIONS" {
@@ -223,7 +225,7 @@ func setUser(w http.ResponseWriter, r *http.Request) {
 	var user User
 	json.Unmarshal(reqBody, &user)
 
-	res, err := collection.InsertOne(context.Background(), bson.M{"name": user.Name, "email": user.Contact.Email, "phone": user.Contact.Phone, "password": user.Password, "account": user.Account})
+	res, err := collection.InsertOne(context.Background(), bson.M{"name": user.Name, "email": user.Contact.Email, "phone": user.Contact.Phone, "password": user.Password, "account": user.Account, "hasBusiness": user.Bussiness, "languages": user.Languages})
 	if err != nil {
 		return
 	}

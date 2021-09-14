@@ -1,0 +1,29 @@
+[
+    {
+        "id": "xzy23",
+        "owner": "Blas",
+        "language": "golang",
+        "description": "a print method with fancy format",
+        "upvotes": 2,
+        "downvotes": 0,
+        "content": "<code>fprint(%v)<code>"
+    },
+    {
+        "id": "xzy11",
+        "owner": "Julia",
+        "language": "sass",
+        "description": "a cool mixin",
+        "upvotes": 4,
+        "downvotes": 0,
+        "content": "Some Mix"
+    },
+    {
+        "id": "zyx32",
+        "owner": "Igor",
+        "language": "javascript",
+        "description": "a fancey arrow function",
+        "upvotes": 1,
+        "downvotes": 0,
+        "content": "<code>const take = () => {String(101001)}<code>"
+    }
+]

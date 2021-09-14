@@ -127,7 +127,14 @@ export function useAuth(
   );
 
   const subscribeUser = useCallback((data) => {
-    let body = { name: data.name, email: data.email, phone: data.phone };
+    let body = {
+      name: data.name,
+      password: "welcome",
+      account: 0,
+      hasBusiness: false,
+      languages: ["english","german"],
+      contact: { email: data.email, phone: data.phone },
+    };
     let response = axios.post(endpoint + "register", body, config);
     response.then((result) => {
       if (result.data) {

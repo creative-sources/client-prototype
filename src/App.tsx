@@ -5,10 +5,11 @@
 import React, { Suspense } from "react";
 import { AppRoutes } from "./router";
 import { AuthProvider } from "./useAuth";
-import "./assets/sass/main.scss";
-import { load } from "./store";
 import { createBreakpoints } from "@chakra-ui/theme-tools";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+
+import "@fontsource/sura"
+import "@fontsource/fira-code"
 
 const breakpoints = createBreakpoints({
   sm: "320px",
@@ -18,9 +19,8 @@ const breakpoints = createBreakpoints({
 });
 const typography = {
   fonts: {
-    body: "monserrat",
-    heading: "Georgia, serif",
-    mono: "Menlo, monospace",
+    body: "Sura",
+    mono: "Fira Code",
   },
   fontSizes: {
     xs: "0.75rem",
@@ -76,16 +76,14 @@ const typography = {
 };
 const colors = {
   brand: {
-    900: "#212121",
-    800: "#363636",
-    700: "#FFC700",
-    600: "#D4D4D4",
-    100: "#FFFFFF",
+    900: "#400101",
+    800: "#8C3503",
+    700: "#A66124",
+    600: "#3C5959",
+    100: "#F2EAD0",
   },
 };
 const theme = extendTheme({ colors, breakpoints, ...typography });
-
-load("welcome");
 
 function App() {
   return (
