@@ -9,8 +9,6 @@ import { createBrowserHistory } from "history";
 import AuthRoute from "./Authroute";
 import Routes from "./routes";
 import { SessionContext, getSessionCookie } from "./sessions";
-import NavBar from "./components/Navigation/NavBar";
-import { Center, SimpleGrid, Text } from "@chakra-ui/react";
 
 const history = createBrowserHistory();
 
@@ -20,7 +18,6 @@ export const AppRoutes = () => {
   return (
     <SessionContext.Provider value={{ session, setSession }}>
       <Router history={history}>
-        <NavBar />
         <Switch>
           {Routes.map((route, index) => (
             <AuthRoute
@@ -36,14 +33,6 @@ export const AppRoutes = () => {
             />
           ))}
         </Switch>
-        <SimpleGrid style={{ position: "sticky", bottom: "0" }} h="12vh">
-          <Center bg="#272727">
-            <Text fontSize="xs" color="yellow.600">
-              {" "}
-              © 2021 Blas Oronoz
-            </Text>
-          </Center>
-        </SimpleGrid>
       </Router>
     </SessionContext.Provider>
   );

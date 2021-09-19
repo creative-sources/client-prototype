@@ -1,9 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { rawSnippet$, topSnippets, Snippet } from "useReactive";
+import { useObservableState } from "observable-hooks";
 
 const Search = () => {
   const [search, setSearch] = useState("");
   const [snippet, setSnippet] = useState<Snippet[]>([]);
+
   useEffect(() => {
     const sub = rawSnippet$.subscribe(setSnippet);
     return () => sub.unsubscribe();
@@ -39,12 +41,23 @@ const Search = () => {
 };
 
 const Reactive = () => {
-  useEffect(() => {
-    topSnippets.subscribe(console.log);
-  }, []);
+  const snippet = useObservableState(topSnippets, []);
+
   return (
     <div style={{ padding: "2rem", backgroundColor: "#fff" }}>
       <Search />
+      <hr />
+      {snippet.map((s) => (
+        <div key={s.id}>
+          <h1>{s.language}</h1>
+          <p>
+            <strong>{s.owner}</strong>
+          </p>
+          <p>{s.description}</p>
+          <code>{s.content}</code>
+          <hr />
+        </div>
+      ))}
     </div>
   );
 };

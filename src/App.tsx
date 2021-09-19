@@ -7,9 +7,10 @@ import { AppRoutes } from "./router";
 import { AuthProvider } from "./useAuth";
 import { createBreakpoints } from "@chakra-ui/theme-tools";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { SnipProvider } from "useReactive";
 
-import "@fontsource/sura"
-import "@fontsource/fira-code"
+import "@fontsource/sura";
+import "@fontsource/fira-code";
 
 const breakpoints = createBreakpoints({
   sm: "320px",
@@ -82,6 +83,17 @@ const colors = {
     600: "#3C5959",
     100: "#F2EAD0",
   },
+  primary: {
+    100: "#E5FCF1",
+    200: "#27EF96",
+    300: "#10DE82",
+    400: "#0EBE6F",
+    500: "#0CA25F",
+    600: "#0A864F",
+    700: "#086F42",
+    800: "#075C37",
+    900: "#064C2E",
+  },
 };
 const theme = extendTheme({ colors, breakpoints, ...typography });
 
@@ -90,9 +102,11 @@ function App() {
     <div className="App">
       <Suspense fallback={<span>waiting...</span>}>
         <AuthProvider initialState={{ name: "guest" }}>
-          <ChakraProvider theme={theme}>
-            <AppRoutes />
-          </ChakraProvider>
+          <SnipProvider>
+            <ChakraProvider theme={theme}>
+              <AppRoutes />
+            </ChakraProvider>
+          </SnipProvider>
         </AuthProvider>
       </Suspense>
     </div>

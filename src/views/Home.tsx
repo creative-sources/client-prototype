@@ -1,46 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { History } from "history";
-import { Text, Button, Center, Flex, Image } from "@chakra-ui/react";
-import { Box } from "@chakra-ui/react";
+import LandingLayout from "components/layout";
+import Hero from "components/Hero";
 
 import { load, subscribe, Store } from "store";
-import background from "../assets/img/application-development-1970020.svg";
+import { useSnips } from "useReactive";
+import { useObservableState } from "observable-hooks";
+
+import { createAvatar } from "@dicebear/avatars";
+import * as style from "@dicebear/avatars-gridy-sprites";
+
+let svg = createAvatar(style, {
+  seed: "custom-seed",
+  // ... and other options
+});
+
 interface ChildComponentProps {
   history: History;
   /* other props for ChildComponent */
 }
 
 load("welcome");
+
 export const Home: React.SFC<ChildComponentProps> = ({ history }) => {
+  const { topSnippets } = useSnips();
+  const snips = useObservableState(topSnippets, []);
+  const svgString = encodeURIComponent(svg);
+  const dataUri = `url("data:image/svg+xml,${svgString}")`;
+
   const [state, setState] = useState<Store>();
   useEffect(() => {
     subscribe(setState);
   }, []);
   return (
-    <Center bg="#272826" color="white">
-      <Flex
-        minHeight="80vh"
-        direction="column"
-        alignItems="center"
-        alignContent="space-evenly"
-      >
-        <Text
-          bgGradient="linear(to-l, brand.600,brand.700)"
-          bgClip="text"
-          m="2rem"
-          fontSize="4xl"
-          fontWeight="extrabold"
-          flexBasis="auto"
-        >
-          {state?.title}
-        </Text>
-        <Image h="50vh" borderRadius="full" boxSize="350px" src={background} />
-        <Box marginY="3rem" height="12vh">
-          <Button as="a" bg="Green" variant="ghost" href="/register">
-            Hire me!
-          </Button>
-        </Box>
-      </Flex>
-    </Center>
+    <LandingLayout>
+      <Hero></Hero>
+    </LandingLayout>
   );
 };

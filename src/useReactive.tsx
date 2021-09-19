@@ -1,3 +1,4 @@
+import React, { createContext, useContext } from "react";
 import { BehaviorSubject, map } from "rxjs";
 
 export interface Snippet {
@@ -5,6 +6,7 @@ export interface Snippet {
   owner: string;
   language: string;
   description: string;
+  style: string;
   upvotes: number;
   downvotes: number;
   content: string;
@@ -20,8 +22,9 @@ export const topSnippets = rawSnippet$.pipe(
   map((snip) =>
     snip
       .map((data) => ({
-        upvotes: data.upvotes,
+        ...data,
       }))
+      /* score = comments + saved ... time ... subreddit => front */
       .sort((a, b) => (a.upvotes < b.upvotes ? 1 : -1))
   )
 );
@@ -29,3 +32,16 @@ export const topSnippets = rawSnippet$.pipe(
 fetch("/snippets.json")
   .then((res) => res.json())
   .then((data) => rawSnippet$.next(data));
+
+const SnipContext = createContext({
+  topSnippets,
+  rawSnippet$,
+});
+
+export const useSnips = () => useContext(SnipContext);
+
+export const SnipProvider: React.FunctionComponent = ({ children }) => (
+  <SnipContext.Provider value={{ topSnippets, rawSnippet$ }}>
+    {children}
+  </SnipContext.Provider>
+);

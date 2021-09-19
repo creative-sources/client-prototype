@@ -15,6 +15,7 @@ import {
   Input,
   useDisclosure,
   GridItem,
+  Heading,
 } from "@chakra-ui/react";
 import logo from "../../assets/img/logo.png";
 import { Link } from "react-router-dom";
@@ -61,7 +62,9 @@ const NavBar = () => {
       <GridItem p="2rem " minW={["20vw", "40vw", "60vw", "80vw", "90vw"]}>
         <Box>
           <Link to="/">
-            <Text fontWeight="extrabold">Dcreative</Text>
+            <Heading fontFamily="mono" fontWeight="extrabold">
+              Dcreative
+            </Heading>
           </Link>
         </Box>
       </GridItem>

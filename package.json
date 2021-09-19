@@ -6,6 +6,8 @@
   "dependencies": {
     "@chakra-ui/react": "^1.6.5",
     "@chakra-ui/theme-tools": "^1.1.8",
+    "@dicebear/avatars": "^4.9.1",
+    "@dicebear/avatars-gridy-sprites": "^4.9.1",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@fontsource/b612-mono": "^4.5.0",
@@ -94,6 +96,7 @@
     "@types/storybook__react": "^5.2.1",
     "awesome-typescript-loader": "^5.2.1",
     "css-loader": "^5.2.6",
+    "file-loader": "^6.2.0",
     "mini-css-extract-plugin": "^1.6.0",
     "react-docgen-typescript-loader": "^3.7.2",
     "react-docgen-typescript-webpack-plugin": "^1.1.0",
